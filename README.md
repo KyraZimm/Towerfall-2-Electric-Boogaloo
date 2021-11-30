@@ -8,4 +8,4 @@ There is an easter egg special event that allows you to unlock a new map. Kyra i
 ### Next Steps:
 Nathan: I will now pass the torch to our resident game expert Kyra Zimmermann who will give us an actual plan. Kyra, the README is yours.
 
-Kyra:
+Kyra: Poopy poop butt butt. Ha ha I totally said this. This is me Kyra
