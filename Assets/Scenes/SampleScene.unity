@@ -124,6 +124,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &66314236 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1058192842, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
+    type: 3}
+  m_PrefabInstance: {fileID: 2096927768}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e4645ff423cc2446919c8b49fdaf2a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +217,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &981161249
 GameObject:
@@ -658,7 +670,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1001 &6260064599804018921
+--- !u!1001 &2096927768
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -670,8 +682,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1058192842, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
+      propertyPath: collisions
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058192842, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
       propertyPath: playerSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Gamepad
       objectReference: {fileID: 0}
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
@@ -684,8 +704,7 @@ PrefabInstance:
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1058192842, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
-        type: 3}
+      objectReference: {fileID: 66314236}
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -702,34 +721,30 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 1710339603, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_Layer
-      value: 0
+    - target: {fileID: 6260064600467822102, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6260064600467822103, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6260064600467822103, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6260064600467822568, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6260064600467822568, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.44
+      value: -2.5392027
       objectReference: {fileID: 0}
     - target: {fileID: 6260064600467822568, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.52
+      value: -3.02
       objectReference: {fileID: 0}
     - target: {fileID: 6260064600467822568, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
         type: 3}
@@ -771,5 +786,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1058192844, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}

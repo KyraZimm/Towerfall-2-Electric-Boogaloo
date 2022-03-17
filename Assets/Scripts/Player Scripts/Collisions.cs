@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Collisions : MonoBehaviour
 {
-     //bools for movement, player death, and animation scripts to read
+     //bools for movement, animation, and respawn controllers to read
      public bool onGround;
      public bool onLeftWall;
      public bool onRightWall;
@@ -29,8 +29,8 @@ public class Collisions : MonoBehaviour
 
         //set raycast magnitude so rays are slightly longer than player height/width
         rayMagnitude = gameObject.transform.localScale/2;
-        rayMagnitude.x += gameObject.transform.localScale.x/5;
-        rayMagnitude.y += gameObject.transform.localScale.y/5;
+        rayMagnitude.x += gameObject.transform.localScale.x/6;
+        rayMagnitude.y += gameObject.transform.localScale.y/6;
      } 
     
    
@@ -42,7 +42,6 @@ public class Collisions : MonoBehaviour
         onLeftWall = Physics2D.Raycast(playerPos, Vector2.left, rayMagnitude.x, wallLayer);
         onRightWall = Physics2D.Raycast(playerPos, Vector2.right, rayMagnitude.x, wallLayer);
         onGround = Physics2D.Raycast(playerPos, Vector2.down, rayMagnitude.y, groundLayer);
-
 
         //Debugging rays - for Unity Editor use only
         Debug.DrawRay(playerPos, Vector2.left*rayMagnitude.x, Color.red);
