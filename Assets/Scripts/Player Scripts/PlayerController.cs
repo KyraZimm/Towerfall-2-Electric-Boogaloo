@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     Collisions collisions;
 
      [SerializeField]
-    private bool jumped;
+    private float jumpThreshold;
 
     private void Start()
     {
@@ -33,31 +33,36 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-       Vector2 playerVelocity;
-
-        //player movement in x direction
-        playerVelocity.x = inputDirection.x*playerSpeed;
-        if (!jumped && (collisions.onLeftWall || collisions.onRightWall)){ //if player is on wall and has not jumped, cling to wall
-            playerVelocity.x = 0;
+       
+        //if player is in midair, free-fall
+        if (!collisions.onGround && !collisions.onLeftWall && !collisions.onRightWall){
+            playerRB.velocity = new Vector2(inputDirection.x*playerSpeed, playerRB.velocity.y);
         }
 
-        //player movement in y direction
-        if (collisions.onLeftWall || collisions.onRightWall){ //if player is on wall, climb up/down wall
-            playerVelocity.y = inputDirection.y*playerSpeed;
-        }
-        else{ //if player is not on wall, gravity applies
-            playerVelocity.y = playerRB.velocity.y;
+        //if player is touching ground
+        else if (collisions.onGround){
+            playerRB.velocity = new Vector2(inputDirection.x*playerSpeed, 0);
+            if (inputDirection.y > 0.2f){
+                playerRB.AddForce(jumpForce*Vector3.up, ForceMode2D.Impulse);
+            }
         }
 
-        //pass custom velocity to player's rigidbody
-        playerRB.velocity = playerVelocity;
-
-        //check if player is done jumping
-        if (jumped && (collisions.onGround || collisions.onLeftWall || collisions.onRightWall)){
-            jumped = false;
+        //if player is on wall
+        else if (collisions.onLeftWall){
+            playerRB.velocity = new Vector2(0, inputDirection.y*playerSpeed);
+            if (inputDirection.x > jumpThreshold){
+                playerRB.AddForce(jumpForce*Vector3.right, ForceMode2D.Impulse);
+            }
+        }
+        else if (collisions.onRightWall){
+            playerRB.velocity = new Vector2(0, inputDirection.y*playerSpeed);
+            if (inputDirection.x < -jumpThreshold){
+                playerRB.AddForce(jumpForce*Vector3.left, ForceMode2D.Impulse);
+            }
         }
 
     }
+
    
    //fetch inputs from attached gamepad
     public void OnMove(InputAction.CallbackContext value)
@@ -67,21 +72,8 @@ public class PlayerController : MonoBehaviour
     
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed){ //activate jump right at button push, not at button hold or lift
-
-            if (collisions.onGround){ //force applied up when player jumps from ground
-                playerRB.AddForce(jumpForce*Vector3.up, ForceMode2D.Impulse);
-            }
-            else if (collisions.onLeftWall) { //force applied to the right when player jumps from left wall
-                playerRB.AddForce(jumpForce*Vector3.right, ForceMode2D.Impulse);
-            }
-            else if (collisions.onRightWall){ //force applied to the left when player jumps from right wall
-                playerRB.AddForce(jumpForce*Vector3.left, ForceMode2D.Impulse);
-            }
-
-            jumped = true;
-
-        }
+        
+        
     }
 
 }
