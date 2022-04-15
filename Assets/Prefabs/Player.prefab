@@ -64,7 +64,6 @@ GameObject:
   - component: {fileID: 6260064600467822102}
   - component: {fileID: 1058192842}
   - component: {fileID: 1058192843}
-  - component: {fileID: 1321538169423250242}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -190,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 5
   jumpForce: 5
-  collisions: {fileID: 1321538169423250242}
+  jumpThreshold: 0
 --- !u!114 &1058192843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,18 +249,3 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1321538169423250242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6260064600467822103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fce11604645412342b7856d66c15d1e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onGround: 0
-  onLeftWall: 0
-  onRightWall: 0

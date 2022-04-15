@@ -15,26 +15,30 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float jumpForce;
+    private float gravity;
 
     //control inputs to read
     Vector2 inputDirection;
 
     //movement states
-    Collisions collisions;
+    PlayerCollisions collisions;
 
-     [SerializeField]
+    [SerializeField]
     private float jumpThreshold;
 
     private void Start()
     {
         playerRB = gameObject.GetComponent<Rigidbody2D>();
-        collisions = gameObject.GetComponent<Collisions>();
+        collisions = gameObject.GetComponent<PlayerCollisions>();
+
+        gravity = playerRB.gravityScale;
     }
 
     private void FixedUpdate()
     {
-       
-        //if player is in midair, free-fall
+        ////GAMEPAD INPUTS & MOVEMENT////
+
+       //if player is in midair, free-fall
         if (!collisions.onGround && !collisions.onLeftWall && !collisions.onRightWall){
             playerRB.velocity = new Vector2(inputDirection.x*playerSpeed, playerRB.velocity.y);
         }
@@ -42,7 +46,7 @@ public class PlayerController : MonoBehaviour
         //if player is touching ground
         else if (collisions.onGround){
             playerRB.velocity = new Vector2(inputDirection.x*playerSpeed, 0);
-            if (inputDirection.y > 0.2f){
+            if (inputDirection.y > 0.4f){
                 playerRB.AddForce(jumpForce*Vector3.up, ForceMode2D.Impulse);
             }
         }
@@ -61,6 +65,18 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        ////PHYSICS FINE-TUNING//// - delete this once events are implemented
+
+        //if player detaches from wall, correct gravity scale
+        if (playerRB.gravityScale == 0 && !collisions.onLeftWall && !collisions.onRightWall){
+            playerRB.gravityScale = gravity;
+        }
+
+        //if player attaches to wall, correct gravity scale
+        else if (playerRB.gravityScale == gravity && (collisions.onLeftWall || collisions.onRightWall)){
+            playerRB.gravityScale = 0;
+        }
+
     }
 
    
@@ -68,12 +84,6 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext value)
     {
         inputDirection = value.ReadValue<Vector2>();
-    }
-    
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        
-        
     }
 
 }
