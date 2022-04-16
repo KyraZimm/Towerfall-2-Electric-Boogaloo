@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
         collisions = gameObject.GetComponent<PlayerCollisions>();
 
         gravity = playerRB.gravityScale;
+
+        collisions.OnWallCollisionChanged += GravityControls;
     }
 
     private void FixedUpdate()
@@ -64,19 +66,15 @@ public class PlayerController : MonoBehaviour
                 playerRB.AddForce(jumpForce*Vector3.left, ForceMode2D.Impulse);
             }
         }
+    }
 
-        ////PHYSICS FINE-TUNING//// - delete this once events are implemented
-
-        //if player detaches from wall, correct gravity scale
-        if (playerRB.gravityScale == 0 && !collisions.onLeftWall && !collisions.onRightWall){
+    //turn gravity on/off during/after wall cling
+    private void GravityControls(bool hitWall){
+        if (hitWall){
+            playerRB.gravityScale = 0;
+        }else{
             playerRB.gravityScale = gravity;
         }
-
-        //if player attaches to wall, correct gravity scale
-        else if (playerRB.gravityScale == gravity && (collisions.onLeftWall || collisions.onRightWall)){
-            playerRB.gravityScale = 0;
-        }
-
     }
 
    
