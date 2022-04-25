@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class JumpWithSpace : MonoBehaviour
 {
-   //This script largely controls player movement and accesses gamepad/keyboard inputs.
-
     Rigidbody2D playerRB;
 
     //vars to playtest in editor
@@ -20,15 +18,22 @@ public class PlayerController : MonoBehaviour
     Vector2 inputDirection;
 
     //movement states
-    Collisions collisions;
+    PlayerCollisions collisions;
 
-     [SerializeField]
-    private bool jumped;
+    [SerializeField]
+    private bool canJump;
+    private float gravity;
 
     private void Start()
     {
         playerRB = gameObject.GetComponent<Rigidbody2D>();
-        collisions = gameObject.GetComponent<Collisions>();
+        collisions = gameObject.GetComponent<PlayerCollisions>();
+
+        gravity = playerRB.gravityScale;
+
+        collisions.OnGroundCollisionChanged += TrackJumping;
+        collisions.OnWallCollisionChanged += TrackJumping;
+        collisions.OnWallCollisionChanged += GravityControls;
     }
 
     private void FixedUpdate()
@@ -37,8 +42,11 @@ public class PlayerController : MonoBehaviour
 
         //player movement in x direction
         playerVelocity.x = inputDirection.x*playerSpeed;
-        if (!jumped && (collisions.onLeftWall || collisions.onRightWall)){ //if player is on wall and has not jumped, cling to wall
+        if (canJump && (collisions.onLeftWall || collisions.onRightWall)){ //if player is on wall and has not jumped, cling to wall
             playerVelocity.x = 0;
+        }
+        else if (!canJump && (collisions.onLeftWall || collisions.onRightWall)){ //allow player to jump if button was pressed
+            playerVelocity.x = playerRB.velocity.x;
         }
 
         //player movement in y direction
@@ -52,11 +60,6 @@ public class PlayerController : MonoBehaviour
         //pass custom velocity to player's rigidbody
         playerRB.velocity = playerVelocity;
 
-        //check if player is done jumping
-        if (jumped && (collisions.onGround || collisions.onLeftWall || collisions.onRightWall)){
-            jumped = false;
-        }
-
     }
    
    //fetch inputs from attached gamepad
@@ -64,24 +67,34 @@ public class PlayerController : MonoBehaviour
     {
         inputDirection = value.ReadValue<Vector2>();
     }
+
+    private void TrackJumping(bool hitWall){
+       canJump = hitWall;
+    }
+
+    private void GravityControls(bool hitWall){
+        if (hitWall){
+            playerRB.gravityScale = 0;
+        }else{
+            playerRB.gravityScale = gravity;
+        }
+    }
     
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed){ //activate jump right at button push, not at button hold or lift
+        if (context.performed && canJump){ //activate jump right at button push, not at button hold or lift
+            canJump = false;
 
             if (collisions.onGround){ //force applied up when player jumps from ground
-                playerRB.AddForce(jumpForce*Vector3.up, ForceMode2D.Impulse);
+                playerRB.AddForce(jumpForce*Vector2.up, ForceMode2D.Impulse);
             }
             else if (collisions.onLeftWall) { //force applied to the right when player jumps from left wall
-                playerRB.AddForce(jumpForce*Vector3.right, ForceMode2D.Impulse);
+                playerRB.AddForce(jumpForce*Vector2.right, ForceMode2D.Impulse);
             }
             else if (collisions.onRightWall){ //force applied to the left when player jumps from right wall
-                playerRB.AddForce(jumpForce*Vector3.left, ForceMode2D.Impulse);
+                playerRB.AddForce(jumpForce*Vector2.left, ForceMode2D.Impulse);
             }
-
-            jumped = true;
 
         }
     }
-
 }
