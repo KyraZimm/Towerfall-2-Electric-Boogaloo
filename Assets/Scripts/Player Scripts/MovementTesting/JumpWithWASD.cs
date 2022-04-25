@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class JumpWithWASD : MonoBehaviour
 {
    //This script largely controls player movement and accesses gamepad/keyboard inputs.
 
@@ -23,9 +23,6 @@ public class PlayerController : MonoBehaviour
     //movement states
     PlayerCollisions collisions;
 
-    [SerializeField]
-    private float jumpThreshold;
-
     private void Start()
     {
         playerRB = gameObject.GetComponent<Rigidbody2D>();
@@ -34,6 +31,7 @@ public class PlayerController : MonoBehaviour
         gravity = playerRB.gravityScale;
 
         collisions.OnWallCollisionChanged += GravityControls;
+        collisions.OnGroundCollisionChanged += OnGroundHit;
     }
 
     private void FixedUpdate()
@@ -56,16 +54,18 @@ public class PlayerController : MonoBehaviour
         //if player is on wall
         else if (collisions.onLeftWall){
             playerRB.velocity = new Vector2(0, inputDirection.y*playerSpeed);
-            if (inputDirection.x > jumpThreshold){
+            if (inputDirection.x > 0.6f){
                 playerRB.AddForce(jumpForce*Vector3.right, ForceMode2D.Impulse);
             }
         }
         else if (collisions.onRightWall){
             playerRB.velocity = new Vector2(0, inputDirection.y*playerSpeed);
-            if (inputDirection.x < -jumpThreshold){
+            if (inputDirection.x < -0.6f){
                 playerRB.AddForce(jumpForce*Vector3.left, ForceMode2D.Impulse);
             }
         }
+
+        Debug.Log(inputDirection);
     }
 
     //turn gravity on/off during/after wall cling
@@ -75,6 +75,10 @@ public class PlayerController : MonoBehaviour
         }else{
             playerRB.gravityScale = gravity;
         }
+    }
+
+    private void OnGroundHit(bool hitGround){
+        //temp filler to make ground tracking work
     }
 
    
