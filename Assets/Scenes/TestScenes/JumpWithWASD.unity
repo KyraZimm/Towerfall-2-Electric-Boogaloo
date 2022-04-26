@@ -207,41 +207,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &752749896 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6260064600467822103, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
-    type: 3}
-  m_PrefabInstance: {fileID: 2096927768}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &752749897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752749896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 573b40ed9952de642bf492f2ef455d1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onGround: 0
-  onLeftWall: 0
-  onRightWall: 0
---- !u!114 &752749898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752749896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e4645ff423cc2446919c8b49fdaf2a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 5
-  jumpForce: 10
 --- !u!1 &981161249
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,90 +667,47 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
       propertyPath: m_DefaultControlScheme
-      value: Keyboard&Mouse
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 752749898}
-    - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnMove
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: JumpWithWASD, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: jumpForce
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: collisions
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: playerSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: jumpThreshold
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: jumpThresholdOnWall
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: jumpThresholdOnGround
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: Keyboard&Mouse
-      objectReference: {fileID: 0}
-    - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
+      propertyPath: m_NeverAutoSwitchControlSchemes
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
+      propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
+      propertyPath: m_DeviceLostEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnGamepadLost
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
+      propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnJump
+      propertyPath: m_DeviceRegainedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnGamepadConnected
       objectReference: {fileID: 0}
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerController, Assembly-CSharp
+      propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnGamepadChange
       objectReference: {fileID: 0}
     - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GamepadWatcher, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058192843, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
+      propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6260064600467822102, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
-        type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6260064600467822102, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6260064600467822102, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6260064600467822103, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26,
         type: 3}

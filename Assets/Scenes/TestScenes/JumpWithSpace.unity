@@ -242,7 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 5
   jumpForce: 10
-  jumped: 0
+  canJump: 0
 --- !u!1 &981161249
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,4 +864,5 @@ PrefabInstance:
     - {fileID: 1058192844, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
     - {fileID: 0}
     - {fileID: 1058192842, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
+    - {fileID: 752749898, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1cd6120a51bf6ef4aa4a75ba2d4a5b26, type: 3}

@@ -64,8 +64,6 @@ public class JumpWithWASD : MonoBehaviour
                 playerRB.AddForce(jumpForce*Vector3.left, ForceMode2D.Impulse);
             }
         }
-
-        Debug.Log(inputDirection);
     }
 
     //turn gravity on/off during/after wall cling
