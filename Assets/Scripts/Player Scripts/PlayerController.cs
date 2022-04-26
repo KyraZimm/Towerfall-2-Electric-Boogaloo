@@ -22,13 +22,18 @@ public class PlayerController : MonoBehaviour
     //movement states
     Collisions collisions;
 
-     [SerializeField]
+    [SerializeField]
     private bool jumped;
+
+    [SerializeField]
+    private bool squatting;
 
     private void Start()
     {
         playerRB = gameObject.GetComponent<Rigidbody2D>();
         collisions = gameObject.GetComponent<Collisions>();
+        jumped = false;
+        squatting = false;
     }
 
     private void FixedUpdate()
@@ -51,11 +56,13 @@ public class PlayerController : MonoBehaviour
 
         //pass custom velocity to player's rigidbody
         playerRB.velocity = playerVelocity;
-
+        
+        Debug.LogError($"Squatting: {squatting}, Jumped: {jumped}");
         //check if player is done jumping
         if (jumped && (collisions.onGround || collisions.onLeftWall || collisions.onRightWall)){
             jumped = false;
         }
+
 
     }
    
@@ -69,7 +76,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.performed){ //activate jump right at button push, not at button hold or lift
 
-            if (collisions.onGround){ //force applied up when player jumps from ground
+            if (collisions.onGround && squatting){ //force applied up when player jumps from ground
+                playerRB.AddForce(jumpForce*Vector3.up*2, ForceMode2D.Impulse);
+            }
+            else if (collisions.onGround){
                 playerRB.AddForce(jumpForce*Vector3.up, ForceMode2D.Impulse);
             }
             else if (collisions.onLeftWall) { //force applied to the right when player jumps from left wall
@@ -78,9 +88,21 @@ public class PlayerController : MonoBehaviour
             else if (collisions.onRightWall){ //force applied to the left when player jumps from right wall
                 playerRB.AddForce(jumpForce*Vector3.left, ForceMode2D.Impulse);
             }
-
             jumped = true;
 
+        }
+    }
+
+    public void OnSquat(InputAction.CallbackContext stuff)
+    {
+        // if (Object.ReferenceEquals(stuff, null)){
+        // if (true){
+        //     Debug.LogError("My Suspicions have been confirmed");
+        // }
+        if (stuff.started){
+            Debug.LogError("Ran The Thing");
+            squatting = true;
+            Debug.LogError(squatting);
         }
     }
 
